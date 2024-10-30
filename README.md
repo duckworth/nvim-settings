@@ -1,5 +1,14 @@
 # my nvim-settings
 
+based on nvchad
+
+git clone git@github.com:duckworth/nvim-settings.git ~/.config/nvim
+
+Run :MasonInstallAll command after lazy.nvim finishes downloading plugins.
+Learn customization of ui & base46 from :h nvui.
+
+Update command:
+   Lazy sync 
 
 Notes:
 ~/.config/nvim
