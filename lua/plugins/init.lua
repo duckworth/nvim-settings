@@ -12,7 +12,20 @@ return {
       require "configs.lspconfig"
     end,
   },
-
+  {
+    "nvim-tree/nvim-tree.lua",
+    lazy = false, -- Disable lazy loading
+    config = function()
+      require("nvim-tree").setup {
+        -- Add your nvim-tree configurations here, if any
+      }
+    end,
+  },
+  {
+    'doums/dark.nvim',
+    lazy = false,
+    priority = 1000,
+  },
   -- {
   -- 	"nvim-treesitter/nvim-treesitter",
   -- 	opts = {
