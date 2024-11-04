@@ -20,7 +20,11 @@ Notes:
     │   ├── conform.lua
     │   ├── lazy.lua
     │   └── lspconfig.lua
+    ├── custom         -- Custom scripts and configurations
+    │   └── init.lua
     ├── mappings.lua   -- Custom keybindings
     ├── options.lua    -- Neovim options (similar to `.vimrc` settings)
     └── plugins        -- Plugin setup
         └── init.lua   -- List of plugins to install
+  
+
