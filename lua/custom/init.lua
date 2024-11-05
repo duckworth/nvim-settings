@@ -8,20 +8,22 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
     end,
 })
 
--- Enable mouse support only in nvim-tree
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "NvimTree",
-    callback = function()
-        vim.opt.mouse = "a"  -- Enable mouse support
-    end,
-})
+if not vim.g.neovide then
+    -- Enable mouse support only in nvim-tree
+    vim.api.nvim_create_autocmd("FileType", {
+        pattern = "NvimTree",
+        callback = function()
+            vim.opt.mouse = "a"  -- Enable mouse support
+        end,
+    })
 
--- Disable mouse support when leaving nvim-tree window
-vim.api.nvim_create_autocmd("WinLeave", {
-    pattern = "*",
-    callback = function()
-        if vim.bo.filetype == "NvimTree" then
-            vim.opt.mouse = ""  -- Disable mouse support
-        end
-    end,
-})
+    -- Disable mouse support when leaving nvim-tree window
+    vim.api.nvim_create_autocmd("WinLeave", {
+        pattern = "*",
+        callback = function()
+            if vim.bo.filetype == "NvimTree" then
+                vim.opt.mouse = ""  -- Disable mouse support
+            end
+        end,
+    })
+end
