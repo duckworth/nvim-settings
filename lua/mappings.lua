@@ -5,9 +5,7 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }  
 map("n", ";", ":", { desc = "CMD enter command mode" })
-
-
-
+map({ 'n', 'i', 'v' }, '<F2>', ':NvimTreeToggle<CR>')
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
