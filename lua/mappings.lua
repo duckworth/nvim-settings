@@ -10,13 +10,16 @@ map({ 'n', 'i', 'v' }, '<F2>', ':NvimTreeToggle<CR>')
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
 -- Neovide-specific settings
-if vim.g.neovide then
+if vim.g.neovide then -- vim.fn.has('macunix') then
   map('n', '<D-s>', ':w<CR>') -- Save
   map('v', '<D-c>', '"+y') -- Copy
   map('n', '<D-v>', '"+P') -- Paste normal mode
   map('v', '<D-v>', '"+P') -- Paste visual mode
   map('c', '<D-v>', '<C-R>+') -- Paste command mode
   map('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+  map("n", "<D-n>", ":silent exec '!open --new -b com.neovide.neovide --args ${PWD}'<cr>")
+  map('n', '<D-t>', ':enew<CR>')
+  map({'i', 'v'}, '<D-t>', '<ESC>:enew<CR>')
 end
 
 
