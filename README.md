@@ -29,3 +29,10 @@ Notes:
             └── init.lua   -- List of plugins to install
   
 
+Customizations:
+
+*   **Theme:** Uses the `jellybeans` theme (set in `lua/chadrc.lua`).
+*   **Nvim-Tree:** Automatically opens when Neovim starts with a directory argument. Mouse support is enabled *only* within the Nvim-Tree window (except when using Neovide). (Configuration in `lua/custom/init.lua`).
+*   **Neovide:** Custom settings for new window/tab behavior (location not specified in commit message).
+*   **Font:** Includes settings for the VimR font (in `lua/options.lua`).
+
