@@ -27,10 +27,20 @@ opt.smartcase = true               -- Case-sensitive if uppercase used
 -- vim.api.nvim_set_hl(0, "Normal", { bg = "#151515" })
 vim.g.have_nerd_font = true
 
-if vim.g.neovide then
-  opt.mouse = "a"  -- Enable mouse support
-  -- opt.guifont = "Menlo:h12.00"
-  opt.guifont = "Hack Nerd Font Mono:h13.00"
-  vim.g.neovide_cursor_vfx_mode = "railgun"  -- Optional, visual effect
-  vim.g.neovide_input_use_logo = true  -- Enable Cmd as <D->
+-- Check if Neovide or VimR is running
+if vim.g.neovide or vim.fn.exists("g:gui_vimr") then
+    opt.guifont = "Hack Nerd Font Mono:h13.00"
+
+    -- Neovide specific settings
+    if vim.g.neovide then
+        opt.mouse = "a" -- Enable mouse support
+        vim.g.neovide_cursor_vfx_mode = "railgun" -- Optional, visual effect
+        vim.g.neovide_input_use_logo = true -- Enable Cmd as <D->
+    end
+    -- VimR specific settings
+    if vim.fn.exists("g:gui_vimr") then
+        
+    end
 end
+
+-- if vim.g.neovide or vim.g.vimr then
