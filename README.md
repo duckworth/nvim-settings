@@ -1,4 +1,4 @@
-# my nvim-settings
+# My Neovim Config
 
 based on [nvchad starter](https://github.com/NvChad/starter) template
 
