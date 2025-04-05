@@ -1,8 +1,14 @@
 # my nvim-settings
 
-based on nvchad
+based on [nvchad starter](https://github.com/NvChad/starter) template
 
 git clone git@github.com:duckworth/nvim-settings.git ~/.config/nvim
+
+Uses Hack Nerd Font Mono, install from homebrew:
+
+```
+brew install --cask font-hack-nerd-font
+```
 
 Run :MasonInstallAll command after lazy.nvim finishes downloading plugins.
 Learn customization of ui & base46 from :h nvui.

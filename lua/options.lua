@@ -42,5 +42,3 @@ if vim.g.neovide or vim.fn.exists("g:gui_vimr") then
         
     end
 end
-
--- if vim.g.neovide or vim.g.vimr then
