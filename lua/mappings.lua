@@ -46,7 +46,7 @@ map("n", "<leader>pj3", "<Esc>:%!jq '.'<CR>:set filetype=json<CR>", opts)
 map("n", "<leader>pj4444", "<Esc>:%!python2 -m json.tool<CR>:set filetype=json<CR>", opts)
 
 -- Alternative JSON formatting using Ruby
-map("n", "<leader>pj", "<Esc>:%!ruby -rjson -e 'puts JSON.pretty_generate(JSON.load($<))'<CR>:set filetype=json<CR>:TSBufDisable highlight<CR>:TSBufEnable highlight<CR>", opts)
+map("n", "<leader>pj", "<Esc>:%!ruby -rjson -e 'puts JSON.pretty_generate(JSON.load($<))'<CR>:set filetype=json<CR>:TSBufEnable highlight<CR>", opts)
 -- YAML Formatting using Ruby
 map("n", "<leader>py", "<Esc>:%!ruby -ryaml -e 'puts YAML.load($<).to_yaml'<CR>:set filetype=yaml<CR>", opts)
 
