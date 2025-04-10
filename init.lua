@@ -13,6 +13,8 @@ vim.opt.rtp:prepend(lazypath)
 
 local lazy_config = require "configs.lazy"
 
+
+
 -- load plugins
 -- this will be in ~/.local/share/nvim/
 require("lazy").setup({
