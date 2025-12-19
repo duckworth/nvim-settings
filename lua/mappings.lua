@@ -56,3 +56,34 @@ map("n", "<leader>px2", "<Esc>:%!~/.vim/xmlformat.pl<CR>:set filetype=xml<CR>", 
 
 -- HTML Formatting using tidy
 map("n", "<leader>ph", "<Esc>:%!tidy -q -i --wrap 120 --show-errors 0<CR>:set filetype=html<CR>", opts)
+
+
+-- Paste-only CR/CRLF → LF normalization for VimR
+-- Normalize only when CRs are present in the last inserted chunk
+local grp = vim.api.nvim_create_augroup("NormalizeCROnlyOnPaste", { clear = true })
+
+vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
+ group = grp,
+ callback = function()
+   local srow = vim.api.nvim_buf_get_mark(0, "[")[1]
+   local erow = vim.api.nvim_buf_get_mark(0, "]")[1]
+   if srow == 0 or erow == 0 then return end
+
+   local lines = vim.api.nvim_buf_get_lines(0, srow - 1, erow, true)
+   if #lines == 0 then return end
+
+   -- Quick bail: only act if the change included a CR (you won't type this)
+   local has_cr = false
+   for i = 1, #lines do
+     if lines[i]:find("\r", 1, true) then has_cr = true; break end
+   end
+   if not has_cr then return end
+
+   -- Normalize: CRLF -> LF, then lone CR -> LF
+   local chunk = table.concat(lines, "\n")
+   local norm  = chunk:gsub("\r\n", "\n"):gsub("\r", "\n")
+   if norm == chunk then return end
+
+   vim.api.nvim_buf_set_lines(0, srow - 1, erow, true, vim.split(norm, "\n", { plain = true }))
+ end,
+})
