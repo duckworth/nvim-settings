@@ -21,3 +21,5 @@ tags
 
 .idea
 .vscode
+/.claude/
+/.nvimlog

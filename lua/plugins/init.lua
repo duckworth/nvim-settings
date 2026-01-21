@@ -29,13 +29,18 @@ return {
         -- Automatically refreshes and updates the tree when opening a project
         update_focused_file = {
           enable = true,
-          update_cwd = true,
+          update_root = true,
         },
         -- Controls behavior when opening directories
         hijack_directories = {
           enable = true,
         },
-        open_on_tab = false,
+        tab = {
+          sync = {
+            open = false,
+            close = false,
+          },
+        },
       }
     end,
   },

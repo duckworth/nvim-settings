@@ -23,15 +23,6 @@ if vim.g.neovide then -- vim.fn.has('macunix') then
   map({'i', 'v'}, '<D-t>', '<ESC>:enew<CR>')
 end
 
-
--- vim.api.nvim_set_keymap('v', '<C-^>', '"+y', { noremap = true, silent = true }) -- [94;5u 
--- vim.api.nvim_set_keymap('v', '<C-%>', '"+y', { noremap = true, silent = true }) -- [37;5u
--- vim.api.nvim_set_keymap('v', '<C-&>', '"+P', { noremap = true, silent = true }) -- [38;5u
--- vim.api.nvim_set_keymap('n', '<C-&>', '"+P', { noremap = true, silent = true }) -- [38;5u
--- vim.api.nvim_set_keymap('i', '<C-&>', '"+P', { noremap = true, silent = true }) -- [38;5u
-
-
-
 -- https://github.com/neovide/neovide/issues/1263#issuecomment-1972013043  
 -- vim.keymap.set(
 --     {'n', 'v', 's', 'x', 'o', 'i', 'l', 'c', 't'},
@@ -46,7 +37,7 @@ map("n", "<leader>pj3", "<Esc>:%!jq '.'<CR>:set filetype=json<CR>", opts)
 map("n", "<leader>pj4444", "<Esc>:%!python2 -m json.tool<CR>:set filetype=json<CR>", opts)
 
 -- Alternative JSON formatting using Ruby
-map("n", "<leader>pj", "<Esc>:%!ruby -rjson -e 'puts JSON.pretty_generate(JSON.load($<))'<CR>:set filetype=json<CR>:TSBufEnable highlight<CR>", opts)
+map("n", "<leader>pj", "<Esc>:%!ruby -rjson -e 'puts JSON.pretty_generate(JSON.load($<))'<CR>:set filetype=json<CR>", opts)
 -- YAML Formatting using Ruby
 map("n", "<leader>py", "<Esc>:%!ruby -ryaml -e 'puts YAML.load($<).to_yaml'<CR>:set filetype=yaml<CR>", opts)
 
