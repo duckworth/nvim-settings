@@ -3,7 +3,12 @@ require "nvchad.mappings"
 
 -- add yours here
 
+-- vim-tmux-navigator (override NvChad's Ctrl-h/l window switching)
 local map = vim.keymap.set
+map("n", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", { desc = "Navigate left (tmux/vim)" })
+map("n", "<C-j>", "<cmd>TmuxNavigateDown<cr>", { desc = "Navigate down (tmux/vim)" })
+map("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>", { desc = "Navigate up (tmux/vim)" })
+map("n", "<C-l>", "<cmd>TmuxNavigateRight<cr>", { desc = "Navigate right (tmux/vim)" })
 local opts = { noremap = true, silent = true }  
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map({ 'n', 'i', 'v' }, '<F2>', ':NvimTreeToggle<CR>')
