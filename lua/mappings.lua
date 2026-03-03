@@ -53,6 +53,11 @@ map("n", "<leader>px2", "<Esc>:%!~/.vim/xmlformat.pl<CR>:set filetype=xml<CR>", 
 -- HTML Formatting using tidy
 map("n", "<leader>ph", "<Esc>:%!tidy -q -i --wrap 120 --show-errors 0<CR>:set filetype=html<CR>", opts)
 
+-- Diffview (git diffs)
+map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Git diff view" })
+map("n", "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", { desc = "File git history" })
+map("n", "<leader>gH", "<cmd>DiffviewFileHistory<cr>", { desc = "Repo git history" })
+
 
 -- Paste-only CR/CRLF → LF normalization for VimR
 -- Normalize only when CRs are present in the last inserted chunk

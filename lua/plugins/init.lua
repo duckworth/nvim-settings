@@ -66,4 +66,8 @@ return {
     "christoomey/vim-tmux-navigator",
     lazy = false,
   },
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+  },
 }
