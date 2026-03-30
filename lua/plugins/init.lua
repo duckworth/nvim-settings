@@ -35,6 +35,10 @@ return {
         hijack_directories = {
           enable = true,
         },
+        filters = {
+          dotfiles = false,
+          git_ignored = false,
+        },
         tab = {
           sync = {
             open = false,
