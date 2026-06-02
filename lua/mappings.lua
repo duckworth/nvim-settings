@@ -11,6 +11,7 @@ map("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>", { desc = "Navigate up (tmux/vim)" }
 map("n", "<C-l>", "<cmd>TmuxNavigateRight<cr>", { desc = "Navigate right (tmux/vim)" })
 local opts = { noremap = true, silent = true }  
 map("n", ";", ":", { desc = "CMD enter command mode" })
+map("n", "<leader>rr", "<cmd>luafile %<cr>", { desc = "Reload current file" })
 map({ 'n', 'i', 'v' }, '<F2>', ':NvimTreeToggle<CR>')
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
@@ -55,6 +56,7 @@ map("n", "<leader>ph", "<Esc>:%!tidy -q -i --wrap 120 --show-errors 0<CR>:set fi
 
 -- Diffview (git diffs)
 map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Git diff view" })
+map("n", "<leader>gq", "<cmd>DiffviewClose<cr>", { desc = "Close diff view" })
 map("n", "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", { desc = "File git history" })
 map("n", "<leader>gH", "<cmd>DiffviewFileHistory<cr>", { desc = "Repo git history" })
 
