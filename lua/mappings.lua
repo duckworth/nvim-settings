@@ -64,15 +64,29 @@ map("n", "<leader>gH", "<cmd>DiffviewFileHistory<cr>", { desc = "Repo git histor
 -- Paste-only CR/CRLF → LF normalization for VimR
 -- Normalize only when CRs are present in the last inserted chunk
 local grp = vim.api.nvim_create_augroup("NormalizeCROnlyOnPaste", { clear = true })
+local normalize_cr_on_paste_busy = false
 
 vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
  group = grp,
- callback = function()
-   local srow = vim.api.nvim_buf_get_mark(0, "[")[1]
-   local erow = vim.api.nvim_buf_get_mark(0, "]")[1]
+ callback = function(args)
+   if normalize_cr_on_paste_busy then return end
+
+   local bufnr = args.buf
+   if not vim.api.nvim_buf_is_valid(bufnr) then return end
+
+   local line_count = vim.api.nvim_buf_line_count(bufnr)
+   if line_count == 0 then return end
+
+   local srow = vim.api.nvim_buf_get_mark(bufnr, "[")[1]
+   local erow = vim.api.nvim_buf_get_mark(bufnr, "]")[1]
    if srow == 0 or erow == 0 then return end
 
-   local lines = vim.api.nvim_buf_get_lines(0, srow - 1, erow, true)
+   srow = math.min(math.max(srow, 1), line_count)
+   erow = math.min(math.max(erow, 1), line_count)
+   if erow < srow then return end
+
+   local ok, lines = pcall(vim.api.nvim_buf_get_lines, bufnr, srow - 1, erow, false)
+   if not ok then return end
    if #lines == 0 then return end
 
    -- Quick bail: only act if the change included a CR (you won't type this)
@@ -87,6 +101,8 @@ vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
    local norm  = chunk:gsub("\r\n", "\n"):gsub("\r", "\n")
    if norm == chunk then return end
 
-   vim.api.nvim_buf_set_lines(0, srow - 1, erow, true, vim.split(norm, "\n", { plain = true }))
+   normalize_cr_on_paste_busy = true
+   pcall(vim.api.nvim_buf_set_lines, bufnr, srow - 1, erow, false, vim.split(norm, "\n", { plain = true }))
+   normalize_cr_on_paste_busy = false
  end,
 })
