@@ -1,4 +1,3 @@
-print("Mappings.lua loaded")
 require "nvchad.mappings"
 
 -- add yours here
@@ -11,7 +10,7 @@ map("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>", { desc = "Navigate up (tmux/vim)" }
 map("n", "<C-l>", "<cmd>TmuxNavigateRight<cr>", { desc = "Navigate right (tmux/vim)" })
 local opts = { noremap = true, silent = true }  
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map({ 'n', 'i', 'v' }, '<F2>', ':NvimTreeToggle<CR>')
+map({ "n", "i", "v" }, "<F2>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle file tree" })
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
