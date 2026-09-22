@@ -58,15 +58,28 @@ return {
     lazy = false,
     priority = 1000,
   },
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed, { "markdown", "markdown_inline" })
+    end,
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    keys = {
+      { "<leader>mr", "<cmd>RenderMarkdown buf_toggle<cr>", desc = "Toggle Markdown rendering" },
+    },
+    opts = {
+      enabled = true,
+      render_modes = { "n", "c", "t" },
+      anti_conceal = { enabled = true },
+    },
+  },
   -- {
   --   "Exafunction/windsurf.vim",
   --   event = "BufEnter",
