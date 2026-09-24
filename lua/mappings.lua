@@ -8,7 +8,6 @@ map("n", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", { desc = "Navigate left (tmux/vim
 map("n", "<C-j>", "<cmd>TmuxNavigateDown<cr>", { desc = "Navigate down (tmux/vim)" })
 map("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>", { desc = "Navigate up (tmux/vim)" })
 map("n", "<C-l>", "<cmd>TmuxNavigateRight<cr>", { desc = "Navigate right (tmux/vim)" })
-local opts = { noremap = true, silent = true }  
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<leader>rr", "<cmd>luafile %<cr>", { desc = "Reload current file" })
 map({ "n", "i", "v" }, "<F2>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle file tree" })
@@ -36,22 +35,30 @@ end
 --     { noremap = true, silent = true }
 -- )
 
--- JSON Formatting
-map("n", "<leader>pj2", "<Esc>:%!json_xs -f json -t json-pretty<CR>:set filetype=json<CR>", opts)
-map("n", "<leader>pj3", "<Esc>:%!jq '.'<CR>:set filetype=json<CR>", opts)
-map("n", "<leader>pj4444", "<Esc>:%!python2 -m json.tool<CR>:set filetype=json<CR>", opts)
+local function map_formatter(key, filetype, formatter)
+  map("n", "<leader>" .. key, function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    require("conform").format({
+      bufnr = bufnr,
+      formatters = { formatter },
+      lsp_format = "never",
+      timeout_ms = 3000,
+    }, function(err)
+      if not err then
+        vim.bo[bufnr].filetype = filetype
+      end
+    end)
+  end, { desc = "Format " .. filetype, silent = true })
+end
 
--- Alternative JSON formatting using Ruby
-map("n", "<leader>pj", "<Esc>:%!ruby -rjson -e 'puts JSON.pretty_generate(JSON.load($<))'<CR>:set filetype=json<CR>", opts)
--- YAML Formatting using Ruby
-map("n", "<leader>py", "<Esc>:%!ruby -ryaml -e 'puts YAML.load($<).to_yaml'<CR>:set filetype=yaml<CR>", opts)
-
--- XML Formatting
-map("n", "<leader>px", "<Esc>:%!ruby -W0 ~/.vim/xmlformat.rb<CR>:set filetype=xml<CR>", opts)
-map("n", "<leader>px2", "<Esc>:%!~/.vim/xmlformat.pl<CR>:set filetype=xml<CR>", opts)
-
--- HTML Formatting using tidy
-map("n", "<leader>ph", "<Esc>:%!tidy -q -i --wrap 120 --show-errors 0<CR>:set filetype=html<CR>", opts)
+-- Keep the existing JSON shortcuts as aliases for jq.
+for _, key in ipairs { "pj", "pj2", "pj3", "pj4444" } do
+  map_formatter(key, "json", "jq")
+end
+map_formatter("py", "yaml", "ruby_yaml")
+map_formatter("px", "xml", "xmlformat_ruby")
+map_formatter("px2", "xml", "xmlformat_perl")
+map_formatter("ph", "html", "html_tidy")
 
 -- Diffview (git diffs)
 map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Git diff view" })

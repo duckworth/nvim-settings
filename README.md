@@ -59,6 +59,11 @@ Customizations:
 *   **Nvim-Tree:** Automatically opens when Neovim starts with a directory argument. Mouse support uses NvChad defaults and stays enabled in all windows. (Directory startup behavior is in `lua/custom/init.lua`.)
 *   **Neovide:** New window/tab and clipboard shortcuts are in `lua/mappings.lua`.
 *   **Font:** VimR manages its font in Settings > Appearance. Neovide uses `lua/options.lua`.
+*   **Formatting:** `<leader>pj`, `pj2`, `pj3`, and `pj4444` all format JSON with `jq`.
+    `<leader>py` formats YAML with Ruby, `px`/`px2` format XML with the existing
+    Ruby/Perl scripts in `~/.vim/`, and `ph` formats HTML with `tidy`. All use
+    Conform, so failed commands leave the buffer unchanged. `<leader>fm` uses the
+    configured formatter for the current filetype.
 
 ## Maintenance
 
