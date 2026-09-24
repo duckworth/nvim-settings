@@ -60,9 +60,12 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "markdown", "markdown_inline" })
-    end,
+    branch = "main",
+    lazy = false,
+    opts = {
+      -- NvChad's TSInstallAll reads this table to install parsers with the new API.
+      ensure_installed = { "lua", "luadoc", "printf", "vim", "vimdoc", "markdown", "markdown_inline" },
+    },
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",

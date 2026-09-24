@@ -13,6 +13,24 @@ brew install --cask font-hack-nerd-font
 Run :MasonInstallAll command after lazy.nvim finishes downloading plugins.
 Learn customization of ui & base46 from :h nvui.
 
+Tree-sitter uses the `main` branch and requires Neovim 0.12 or later and the
+Tree-sitter CLI (0.26.1 or later):
+
+```sh
+brew install tree-sitter-cli
+```
+
+Run `:TSInstallAll` to install the configured parsers and `:TSUpdate` to update
+them. NvChad enables highlighting through Neovim's built-in Tree-sitter API.
+
+If parser builds report `unknown architecture arm64e.x1` on macOS, the selected
+Xcode compiler and Command Line Tools SDK may be mismatched. Start Neovim with
+the matching Command Line Tools compiler for parser installation or updates:
+
+```sh
+DEVELOPER_DIR=/Library/Developer/CommandLineTools nvim
+```
+
 Update command:
    :Lazy update
 
