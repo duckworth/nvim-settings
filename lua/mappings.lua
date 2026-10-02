@@ -12,6 +12,16 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<leader>rr", "<cmd>luafile %<cr>", { desc = "Reload current file" })
 map({ "n", "i", "v" }, "<F2>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle file tree" })
 
+-- JetBrains macOS navigation shortcuts (GUI clients that forward Command keys).
+map({ "n", "i" }, "<D-S-o>", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
+map({ "n", "i" }, "<D-S-f>", "<cmd>Telescope live_grep<cr>", { desc = "Search project text" })
+map({ "n", "i" }, "<D-o>", function()
+  require("telescope.builtin").lsp_dynamic_workspace_symbols {
+    symbols = { "Class", "Interface", "Struct", "Enum" },
+    prompt_title = "Find classes and types",
+  }
+end, { desc = "Find classes and types" })
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
 -- Neovide-specific settings
