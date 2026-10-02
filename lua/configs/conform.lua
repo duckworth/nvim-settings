@@ -5,6 +5,11 @@ local options = {
     yaml = { "ruby_yaml" },
     xml = { "xmlformat_ruby" },
     html = { "html_tidy" },
+    python = { "ruff_format" },
+    javascript = { "prettier" },
+    javascriptreact = { "prettier" },
+    typescript = { "prettier" },
+    typescriptreact = { "prettier" },
     -- css = { "prettier" },
   },
 

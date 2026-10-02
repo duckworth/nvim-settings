@@ -18,7 +18,7 @@ return {
     config = function()
       require("nvim-tree").setup {
         on_attach = function(bufnr)
-          local api = require("nvim-tree.api")
+          local api = require "nvim-tree.api"
           api.config.mappings.default_on_attach(bufnr)
           vim.keymap.set("n", "<LeftRelease>", api.node.open.edit, { buffer = bufnr })
         end,
@@ -64,7 +64,20 @@ return {
     lazy = false,
     opts = {
       -- NvChad's TSInstallAll reads this table to install parsers with the new API.
-      ensure_installed = { "lua", "luadoc", "printf", "vim", "vimdoc", "markdown", "markdown_inline" },
+      ensure_installed = {
+        "lua",
+        "luadoc",
+        "printf",
+        "vim",
+        "vimdoc",
+        "markdown",
+        "markdown_inline",
+        "ruby",
+        "python",
+        "javascript",
+        "typescript",
+        "tsx",
+      },
     },
   },
   {

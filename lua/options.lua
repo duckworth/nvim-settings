@@ -17,4 +17,5 @@ if vim.g.neovide then
   opt.guifont = "Hack Nerd Font Mono:h13.00"
   vim.g.neovide_cursor_vfx_mode = "railgun"
   vim.g.neovide_input_use_logo = true
+  vim.g.neovide_input_macos_option_key_is_meta = "only_left"
 end

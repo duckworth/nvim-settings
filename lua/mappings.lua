@@ -18,13 +18,13 @@ map({ "n", "i", "v" }, "<F2>", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle file 
 if vim.g.neovide then -- vim.fn.has('macunix') then
   map('n', '<D-s>', ':w<CR>') -- Save
   map('v', '<D-c>', '"+y') -- Copy
-  map('n', '<D-v>', '"+P') -- Paste normal mode
-  map('v', '<D-v>', '"+P') -- Paste visual mode
-  map('c', '<D-v>', '<C-R>+') -- Paste command mode
-  map('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+  -- Paste via nvim_paste so it works in every mode (incl. terminal)
+  map({ 'n', 'v', 's', 'x', 'o', 'i', 'l', 'c', 't' }, '<D-v>', function()
+    vim.api.nvim_paste(vim.fn.getreg '+', true, -1)
+  end, { noremap = true, silent = true })
   map("n", "<D-n>", ":silent exec '!open --new -b com.neovide.neovide --args ${PWD}'<cr>")
   map('n', '<D-t>', ':enew<CR>')
-  map({'i', 'v'}, '<D-t>', '<ESC>:enew<CR>')
+  map({ 'i', 'v' }, '<D-t>', '<ESC>:enew<CR>')
 end
 
 -- https://github.com/neovide/neovide/issues/1263#issuecomment-1972013043  
