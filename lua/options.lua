@@ -3,6 +3,7 @@ require "nvchad.options"
 local opt = vim.opt
 
 -- Personal preferences beyond NvChad's defaults.
+opt.number = false
 opt.relativenumber = false
 opt.wrap = true
 opt.scrolloff = 3
