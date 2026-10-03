@@ -1,5 +1,39 @@
 return {
   {
+    "folke/snacks.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      image = { enabled = true },
+      gitbrowse = { enabled = true },
+      lazygit = { enabled = true },
+    },
+    keys = {
+      {
+        "<leader>gg",
+        function()
+          Snacks.lazygit()
+        end,
+        desc = "Open LazyGit",
+      },
+      {
+        "<leader>gb",
+        function()
+          Snacks.gitbrowse { what = "file" }
+        end,
+        mode = { "n", "x" },
+        desc = "Open file on GitHub",
+      },
+      {
+        "<leader>ih",
+        function()
+          Snacks.image.hover()
+        end,
+        desc = "Preview image under cursor",
+      },
+    },
+  },
+  {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
