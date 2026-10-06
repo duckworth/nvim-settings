@@ -25,10 +25,11 @@ end, { desc = "Find classes and types" })
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
+map("x", "<D-c>", '"+y', { desc = "Copy to clipboard" }) -- Copy
+
 -- Neovide-specific settings
 if vim.g.neovide then -- vim.fn.has('macunix') then
   map('n', '<D-s>', ':w<CR>') -- Save
-  map('v', '<D-c>', '"+y') -- Copy
   -- Paste via nvim_paste so it works in every mode (incl. terminal)
   map({ 'n', 'v', 's', 'x', 'o', 'i', 'l', 'c', 't' }, '<D-v>', function()
     vim.api.nvim_paste(vim.fn.getreg '+', true, -1)
