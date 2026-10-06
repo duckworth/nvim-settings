@@ -73,6 +73,10 @@ map_formatter("px2", "xml", "xmlformat_perl")
 map_formatter("ph", "html", "html_tidy")
 
 -- Diffview (git diffs)
+map("n", "<leader>ob", function()
+  vim.ui.open(vim.api.nvim_buf_get_name(0))
+end, { desc = "Open current file in default app/browser" })
+
 map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Git diff view" })
 map("n", "<leader>gq", "<cmd>DiffviewClose<cr>", { desc = "Close diff view" })
 map("n", "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", { desc = "File git history" })

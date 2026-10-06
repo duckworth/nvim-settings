@@ -15,7 +15,7 @@ M.base46 = {
 }
 
 M.mason = {
-  pkgs = { "basedpyright", "ruff", "typescript-language-server", "prettier" },
+  pkgs = { "basedpyright", "ruff", "typescript-language-server", "prettier", "html-lsp", "css-lsp" },
   -- Ruby LSP must use the project's Ruby and gems from PATH.
   skip = { "ruby-lsp" },
 }
