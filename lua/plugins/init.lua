@@ -34,6 +34,19 @@ return {
     },
   },
   {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    event = "VeryLazy",
+    config = function()
+      local pkgs = vim.deepcopy(require("chadrc").mason.pkgs)
+      vim.list_extend(pkgs, { "stylua" })
+      require("mason-tool-installer").setup {
+        ensure_installed = pkgs,
+        auto_update = true,
+        run_on_start = true,
+      }
+    end,
+  },
+  {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
