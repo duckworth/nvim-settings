@@ -24,4 +24,19 @@ vim.lsp.config("ruff", {
   end,
 })
 
+-- Run ruby-lsp with the project's Ruby: bundle when the Gemfile lists it, else mise (honors .tool-versions).
+vim.lsp.config("ruby_lsp", {
+  cmd = function(dispatchers, config)
+    local root = config.root_dir or vim.uv.cwd()
+    local cmd = { "ruby-lsp" }
+    local gemfile = vim.fs.joinpath(root, "Gemfile")
+    if vim.fn.filereadable(gemfile) == 1 and table.concat(vim.fn.readfile(gemfile), "\n"):find("ruby-lsp", 1, true) then
+      cmd = { "bundle", "exec", "ruby-lsp" }
+    elseif vim.fn.executable "mise" == 1 then
+      cmd = { "mise", "exec", "--", "ruby-lsp" }
+    end
+    return vim.lsp.rpc.start(cmd, dispatchers, { cwd = root })
+  end,
+})
+
 vim.lsp.enable { "html", "cssls", "ruby_lsp", "basedpyright", "ruff", "ts_ls" }
