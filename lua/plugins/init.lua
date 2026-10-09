@@ -4,7 +4,8 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
-      image = { enabled = true },
+      -- herdr relays kitty graphics but snacks cannot identify it as a supported terminal
+      image = { enabled = true, force = vim.env.TERM_PROGRAM == "herdr" },
       gitbrowse = { enabled = true },
       lazygit = { enabled = true },
     },
