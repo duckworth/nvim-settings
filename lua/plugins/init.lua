@@ -3,9 +3,15 @@ return {
     "folke/snacks.nvim",
     lazy = false,
     priority = 1000,
+    init = function()
+      -- herdr relays kitty graphics (incl. unicode placeholders) but its XTVERSION reply can be missed when
+      -- the nvim server has no UI attached yet (herdr-nvim sidebar daemon), so declare the capability up front
+      if vim.env.HERDR_ENV == "1" or vim.env.TERM_PROGRAM == "herdr" then
+        vim.env.SNACKS_GHOSTTY = vim.env.SNACKS_GHOSTTY or "1"
+      end
+    end,
     opts = {
-      -- herdr relays kitty graphics but snacks cannot identify it as a supported terminal
-      image = { enabled = true, force = vim.env.TERM_PROGRAM == "herdr" },
+      image = { enabled = true },
       gitbrowse = { enabled = true },
       lazygit = { enabled = true },
     },
